@@ -12,6 +12,66 @@
 // sortedFrequency([1,1,2,2,2,2,3],1) // 2
 // sortedFrequency([1,1,2,2,2,2,3],4) // -1
 
+
+function sortedFrequency(arr, num){
+    let leftIdx = 0;
+    let rightIdx = arr.length - 1;
+    while(leftIdx <= rightIdx){
+        let middleIdx = Math.floor((leftIdx + rightIdx) / 2);
+        let middleVal = arr[middleIdx];
+        if(middleVal > num){
+           rightIdx = middleIdx - 1;
+        }
+        else if(middleVal < num){
+            leftIdx = middleIdx + 1;    
+        }
+        else if(middleVal === num && middleVal === arr[middleIdx - 1]){
+            rightIdx = middleIdx - 1;
+        }
+        else{
+            rightIdx = middleIdx
+            break
+        }
+    }
+    partOne = rightIdx;
+    if(arr[partOne] !== num){
+        return -1
+    }
+    leftIdx = 0;
+    rightIdx = arr.length - 1;
+    while(leftIdx <= rightIdx){
+        let middleIdx = Math.floor((leftIdx + rightIdx) / 2)
+        let middleVal = arr[middleIdx];
+
+        if(middleVal < num){
+            leftIdx = middleIdx + 1;
+        }
+        else if(middleVal > num){
+            rightIdx = middleIdx - 1;
+        }
+        else if(middleVal === num && middleVal === arr[middleIdx + 1]){
+            leftIdx = middleIdx + 1;
+        }
+        else{
+            leftIdx = middleIdx;
+            break
+        }
+    }
+    return leftIdx - partOne + 1
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ATTEMPT ONE
 function sortedFrequency(arr, num){
     let leftIdx = 0;
     let rightIdx = arr.length - 1;
