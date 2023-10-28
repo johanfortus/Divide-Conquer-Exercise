@@ -13,6 +13,80 @@
 // findRotatedIndex([37,44,66,102,10,22],14) // -1
 // findRotatedIndex([6, 7, 8, 9, 1, 2, 3, 4], 12) // -1
 
+
+function findRotatedIndex(arr, num){
+    let leftIdx = 0;
+    let rightIdx = arr.length - 1;
+    while(leftIdx <= rightIdx){
+        let middleIdx = Math.floor((leftIdx + rightIdx) / 2);
+        let middleVal = arr[middleIdx];
+
+        if(middleVal < arr[0] && middleVal < arr[middleIdx - 1]){
+            rightIdx = middleIdx - 1;
+            break
+        }
+       
+        if(middleVal > arr[0]){
+            leftIdx = middleIdx + 1;
+        }
+        else if(middleVal < arr[0]){
+            rightIdx = middleIdx;
+        }
+        else if(middleIdx === leftIdx && middleIdx === 0){
+            rightIdx = 0;
+            break
+        }
+    }
+
+    partOne = rightIdx + 1;
+    leftIdx = 0;
+
+    while(leftIdx <= rightIdx){
+        let middleIdx = Math.floor((leftIdx + rightIdx) / 2);
+        let middleVal = arr[middleIdx];
+
+        if(middleVal < num){
+            leftIdx = middleIdx + 1;
+        }
+        else if(middleVal > num){
+            rightIdx = middleIdx - 1;
+        }
+        else if(middleVal === num){
+            return middleIdx
+        }
+        else{
+            break
+        }
+    }
+    
+    leftIdx = partOne
+    rightIdx = arr.length - 1;
+
+    while(leftIdx <= rightIdx){
+        let middleIdx = Math.floor((leftIdx + rightIdx) / 2);
+        let middleVal = arr[middleIdx];
+
+        if(middleVal < num){
+            leftIdx = middleIdx + 1;
+        }
+        else if(middleVal > num){
+            rightIdx = middleIdx - 1;
+        }
+        else if(middleVal === num){
+            return middleIdx
+        }
+        else{
+            break
+        }
+    }
+    return -1;
+}
+
+
+
+
+
+// ATTEMPT ONE
 function findRotatedIndex(arr, num){
     let leftIdx = 0;
     let rightIdx = arr.length - 1;
